@@ -1,0 +1,58 @@
+
+
+<html>
+    <head>
+        <link rel="stylesheet" href="css/vegas-style.css">
+        <link rel="stylesheet" href="vegas/vegas.css">
+
+        <script src="js/jquery.js"></script>
+        <script src="vegas/vegas.js"></script>
+        <script src="./slides.json"></script>
+
+        <script>
+            $(document).ready(function() {
+                
+                var test = []
+
+                $.getJSON("./slides.json", function(data) {
+                    console.log(data.Data[0]);
+                    test = data.Data
+                    console.log(test, "hi")
+                })
+
+
+                setTimeout(function() {
+                    console.log(test[0]);
+                    $('#background-image').vegas({
+                        overlay: 'vegas/overlays/02.png',
+                        slides: test,
+                        walk: function (index, slideSettings) {
+                            $('.text-block h1').html(test[index].title)
+                            $('.text-block h4').html(test[index].subtitle)
+                        }
+                    })
+                }, 1000);
+
+                
+                // console.log(this.data, "this")
+                // const mySlides = [
+                //         { src: "https://picsum.photos/id/1/1900/1200", title: "Title #1", subtitle: "Subtitle #1" },   
+                //         { src: "https://picsum.photos/id/10/1900/1200", title: "Title #2", subtitle: "Subtitle #2" },
+                //         { src: "https://picsum.photos/id/100/1900/1200", title: "Title #3", subtitle: "Subtitle #3" },
+                //         { src: "https://picsum.photos/id/1000/1900/1200", title: "Title #4", subtitle: "Subtitle #4" },
+                // ]
+
+            })
+        </script>
+    </head>
+    <body>
+        <div id="background-image">
+            <div class="container">
+                <div class="text-block">
+                    <h1></h1>
+                    <h4></h4>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
